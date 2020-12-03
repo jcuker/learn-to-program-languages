@@ -1,0 +1,15 @@
+print "Hello, world!";
+// print "Should not print!";
+
+/*
+nothing in here
+
+should
+
+
+
+
+be scanned
+*/
+
+print "This should print!";
