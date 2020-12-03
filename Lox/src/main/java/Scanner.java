@@ -96,6 +96,8 @@ class Scanner {
                 if (match('/')) {
                     // A comment goes until the end of the line.
                     while (peek() != '\n' && !isAtEnd()) advance();
+                } else if (match('*')) {
+                    handleBlockComment();
                 } else {
                     addToken(TokenType.SLASH);
                 }
@@ -120,6 +122,26 @@ class Scanner {
                     Lox.error(line, "Unexpected character.");
                 }
                 break;
+        }
+    }
+
+    private void handleBlockComment() {
+        boolean stillInBlockComment = true;
+
+        while (stillInBlockComment) {
+            // Go until we find a '*' character
+            if (peek() == '*' && !isAtEnd()) {
+                // now that we've found a '*' we need to check if it ends the block comment
+                // first, advance over the '*' character
+                advance();
+
+                // if the '*' character is proceeded by a '/', end the block comment
+                if (peek() == '/') {
+                    stillInBlockComment = false;
+                }
+            }
+
+            advance();
         }
     }
 

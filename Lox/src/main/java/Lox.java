@@ -22,7 +22,8 @@ public class Lox {
 
     private static void runFile(String path) throws IOException {
         byte[] bytes = Files.readAllBytes(Paths.get(path));
-        run(new String(bytes, Charset.defaultCharset()));
+        String fileBytesAsString = new String(bytes, Charset.defaultCharset());
+        run(fileBytesAsString);
         if (hadError) System.exit(65);
     }
 
